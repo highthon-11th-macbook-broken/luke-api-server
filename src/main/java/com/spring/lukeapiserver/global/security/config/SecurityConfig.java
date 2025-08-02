@@ -47,11 +47,6 @@ public class SecurityConfig implements WebMvcConfigurer {
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // 비밀번호를 BCrypt 알고리즘으로 암호화
-    }
-
     // CORS 설정 메서드 추가
     @Override
     public void addCorsMappings(CorsRegistry registry) {
