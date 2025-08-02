@@ -3,6 +3,7 @@ package com.spring.lukeapiserver.domain.user.client.dto;
 import com.spring.lukeapiserver.domain.user.domain.entity.UserEntity;
 import com.spring.lukeapiserver.domain.user.domain.enums.Gender;
 import com.spring.lukeapiserver.domain.user.domain.enums.UserRole;
+import com.spring.lukeapiserver.global.infra.google.dto.OAuth2Attribute;
 
 public record User(
         String email,
@@ -31,5 +32,12 @@ public record User(
                 entity.getPwPattern3(),
                 entity.getUserRole()
                 );
+    }
+
+    public static UserEntity createEntity(OAuth2Attribute oAuth2Attribute) {
+        return UserEntity.builder()
+                .email(oAuth2Attribute.email())
+                .userRole(UserRole.USER)
+                .build();
     }
 }
