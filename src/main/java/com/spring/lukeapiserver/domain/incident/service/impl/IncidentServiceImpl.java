@@ -28,6 +28,9 @@ public class IncidentServiceImpl implements IncidentService {
                 .incidentNumber(String.format("%06d", number))
                 .email(user.email())
                 .text(request.text())
+                .riskLevel(request.riskLevel())
+                .eventDateTime(request.eventDateTime())
+                .source(request.source())
                 .build());
     }
 
