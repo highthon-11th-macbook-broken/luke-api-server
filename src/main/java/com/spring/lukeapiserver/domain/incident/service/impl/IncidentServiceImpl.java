@@ -8,6 +8,7 @@ import com.spring.lukeapiserver.domain.incident.service.IncidentService;
 import com.spring.lukeapiserver.domain.user.client.dto.User;
 import com.spring.lukeapiserver.global.common.repository.UserSecurity;
 import java.util.List;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,10 @@ public class IncidentServiceImpl implements IncidentService {
     @Override
     public void registerIncident(RegisterIncidentRequest request) {
         User user = userSecurity.getUser();
+        Random random = new Random();
+        int number = random.nextInt(1_000_000); // 0 ~ 999999 범위
         incidentJpaRepository.save(IncidentEntity.builder()
+                .incidentNumber(String.format("%06d", number))
                 .email(user.email())
                 .text(request.text())
                 .build());
