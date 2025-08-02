@@ -6,11 +6,13 @@ import com.spring.lukeapiserver.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,7 @@ public class UserController {
 
     @PutMapping
     @Operation(summary = "유저 정보 수정")
-    public void editUser(UserEditRequest request, HttpServletRequest httpRequest) {
+    public void editUser(@RequestBody @Valid UserEditRequest request, HttpServletRequest httpRequest) {
         userService.editUser(request, httpRequest);
     }
 
