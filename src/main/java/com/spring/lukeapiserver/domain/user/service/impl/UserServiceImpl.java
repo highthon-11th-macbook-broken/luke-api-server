@@ -1,5 +1,6 @@
 package com.spring.lukeapiserver.domain.user.service.impl;
 
+import com.spring.lukeapiserver.domain.incident.domain.repository.jpa.IncidentJpaRepository;
 import com.spring.lukeapiserver.domain.user.client.dto.User;
 import com.spring.lukeapiserver.domain.user.client.dto.request.UserEditRequest;
 import com.spring.lukeapiserver.domain.user.domain.entity.UserEntity;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserJpaRepository userJpaRepository;
+    private final IncidentJpaRepository incidentJpaRepository;
     private final UserSecurity userSecurity;
 
     @Override
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser() {
         User user = getUser();
         userJpaRepository.deleteById(user.email());
+        incidentJpaRepository.deleteAllByEmail(user.email());
     }
 
 }
